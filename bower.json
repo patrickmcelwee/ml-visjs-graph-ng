@@ -1,0 +1,32 @@
+{
+  "name": "ml-visjs-graph-ng",
+  "version": "0.0.1",
+  "authors": [
+    "Patrick McElwee <patrick.mcelwee@marklogic.com>"
+  ],
+  "description": "Graph visualizations for Angular app with VisJS, using triples stored in MarkLogic",
+  "main": [
+    "dist/ml-visjs-graph-ng.css",
+    "dist/ml-visjs-graph-ng.js",
+    "dist/ml-visjs-graph-ng-templates.js"
+  ],
+  "keywords": [
+    "MarkLogic",
+    "Visualization",
+    "Graph",
+    "VisJS",
+    "Semantics",
+    "Triples"
+  ],
+  "license": "Apache License 2.0",
+  "homepage": "https://github.com/patrickmcelwee/ml-visjs-graph-ng",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "bower.json",
+    "README.markdown",
+    "test",
+    "tests"
+  ]
+}
