@@ -10,6 +10,12 @@
     "dist/ml-visjs-graph-ng.js",
     "dist/ml-visjs-graph-ng-templates.js"
   ],
+  "dependencies": {
+    "angular": "~1.4.4",
+    "angular-bootstrap": "~0.13.3",
+    "vis": "^4.16.1",
+    "angular-visjs": "https://github.com/visjs/angular-visjs.git#8a825e40852d29355a752ee1c30e28b3d989a1a8"
+  },
   "keywords": [
     "MarkLogic",
     "Visualization",
