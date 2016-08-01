@@ -28,3 +28,26 @@ angular.module('app', [
   # ...
 ]);
 ```
+
+## Sample Data
+
+The original [slush-generated
+app](https://github.com/marklogic/slush-marklogic-node) comes with 3000 JSON
+documents representing people. For the moment, those documents do not include
+triples.
+
+This code repository has the same JSON documents, enriched with triples
+representing foaf:knows relationships, an rdf:type, and an rdfs:label for each
+document. To use, you can replace the original `sample-data.zip` file in the
+slush-generated app with the `sample-data.zip` file in this project.
+(Eventually, the slush-generated app may use this project's version with
+triples.)
+
+Then, you can load them with
+(MLCP)[https://docs.marklogic.com/guide/ingestion/content-pump] like this:
+
+    ./ml local mlcp -options_file import-sample-data.options
+
+Or on Windows:
+
+    ml.bat local mlcp -options_file import-sample-data.options
