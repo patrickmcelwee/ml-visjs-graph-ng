@@ -3,6 +3,7 @@
   
   angular.module('ml.visjsGraph', [
     'ngVis',
+    'ui.bootstrap',
     'ui.router'
   ])
   .config(routeConfig);
@@ -125,9 +126,9 @@
   angular.module('ml.visjsGraph')
     .controller('visjsGraphCtrl', VisjsGraphCtrl);
 
-  VisjsGraphCtrl.$inject = ['visjsGraphService', '$scope', '$state', '$window', '$modal', 'VisDataSet'];
+  VisjsGraphCtrl.$inject = ['visjsGraphService', '$scope', '$state', '$window', '$uibModal', 'VisDataSet'];
 
-  function VisjsGraphCtrl(visjsGraphService, $scope, $state, $window, $modal, VisDataSet) {
+  function VisjsGraphCtrl(visjsGraphService, $scope, $state, $window, $uibModal, VisDataSet) {
     var ctrl = this;
     var items = $scope.items;
     var nodes, edges;
@@ -547,7 +548,7 @@
 
     //     // Only give the option to merge if nodes are the same type.
     //     if (primaryNode.group === secondaryNode.group) {
-    //       $modal({
+    //       $uibModal({
     //         scope: $scope,
     //         template: '/src/visjs-graph/templates/link-type-selection.html',
     //         title: 'Create new link',
@@ -556,7 +557,7 @@
     //     }
     //     else {
     //       ctrl.linkData.linkType = 'newLink';
-    //       $modal({
+    //       $uibModal({
     //         scope: $scope,
     //         template: '/src/vis-graph/templates/edit-link-name.html',
     //         title: 'Create new link',
