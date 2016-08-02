@@ -61,4 +61,9 @@ gulp.task('templates', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['jshint', 'scripts', 'templates', 'styles']);
+gulp.task('images', function() {
+  return gulp.src(['./src/images/*'])
+    .pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('default', ['jshint', 'scripts', 'templates', 'styles', 'images']);
