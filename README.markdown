@@ -10,10 +10,6 @@ generator](https://github.com/marklogic/slush-marklogic-node) in mind.
 
     bower install ml-visjs-graph-ng --save
 
-## Directives Provided
-
-TODO
-
 ## Example Implementation
 
 Add the `ml.visjsGraph` module as a dependency to your app.module. For
@@ -51,3 +47,8 @@ Then, you can load them with
 Or on Windows:
 
     ml.bat local mlcp -options_file import-sample-data.options
+
+## Directives Provided
+
+TODO
+
