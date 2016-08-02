@@ -48,7 +48,7 @@ You can add a link to the VisJS graph for a document by adding the following
 HTML snippet to a template:
 
 ```html
-<a ui-sref="root.visjs-graph({uri: docUri})">Go to the VisJS graph for {{docUri}}</a>
+<a ui-sref="root.visjs-graph({id: docUri})">Go to the VisJS graph for {{docUri}}</a>
 ```
 
 For example, in a slush-generated app, you can add this markup to
@@ -59,7 +59,7 @@ For example, in a slush-generated app, you can add this markup to
   <div class="panel panel-default">
     <div class="panel-heading">Graph</div>
     <div class="panel-body" style="min-height: 50px;">
-      Explore triples for <a ui-sref="root.visjs-graph({uri: ctrl.uri})">{{ctrl.uri}}</a>
+      Explore triples for <a ui-sref="root.visjs-graph({id: ctrl.uri})">{{ctrl.uri}}</a>
     </div>
   </div>
 </div>
