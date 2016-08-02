@@ -6,7 +6,8 @@
     .controller('visjsGraphCtrl', VisjsGraphCtrl);
 
   VisjsGraphCtrl.$inject = ['visjsGraphService', '$scope', '$state', '$window', '$modal', 'VisDataSet'];
-  function GraphCtrl(visjsGraphService, $scope, $state, $window, $modal, VisDataSet) {
+
+  function VisjsGraphCtrl(visjsGraphService, $scope, $state, $window, $modal, VisDataSet) {
     var ctrl = this;
     var items = $scope.items;
     var nodes, edges;
