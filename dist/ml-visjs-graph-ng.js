@@ -191,7 +191,7 @@
       interaction: {
         navigationButtons: true
       },
-      height: '70%',
+      height: '600px',
       manipulation: {
         enabled: false,
         initiallyActive: false,
