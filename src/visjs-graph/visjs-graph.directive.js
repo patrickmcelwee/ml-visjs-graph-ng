@@ -11,7 +11,7 @@
       scope: {
         items: '=items'
       },
-      templateUrl: 'app/visjs-graph/visjs-graph.html',
+      templateUrl: '/visjs-graph/visjs-graph.html',
       controller: 'visjsGraphCtrl',
       controllerAs: 'ctrl',
       link: function(scope, element, attrs) {
