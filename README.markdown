@@ -8,7 +8,26 @@ generator](https://github.com/marklogic/slush-marklogic-node) in mind.
 
 ## Getting Started
 
+Install this library:
+
     bower install ml-visjs-graph-ng --save
+
+Install the [mlpm module](https://github.com/patrickmcelwee/mlpm-visjs-graph):
+
+    npm install -g mlpm
+    mlpm install visjs-graph --save
+    mlpm deploy -H localhost -P 8040 -u admin -p admin
+
+Also, since this library works based on SPARQL queries against triples stored
+in your MarkLogic database, you need to enable the triple index. Unless you
+know better, you should do this in `deploy/ml-config.xml` of your application.
+Add the following line to the `<database></database>` configuration for the
+database with name `<database-name>${content-db}</database-name>` (around line
+179 at the time of this writing).
+
+```xml
+      <triple-index>true</triple-index>
+```
 
 ## Example Implementation
 
