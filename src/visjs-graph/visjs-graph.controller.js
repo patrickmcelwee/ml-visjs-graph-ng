@@ -108,20 +108,16 @@
         }
       },
       groups: {
-        organization: {
-          shape: 'circularImage'
-        },
-        person: {
-          shape: 'circularImage'
-        },
-        location: {
-          shape: 'circularImage'
-        },
-        event: {
-          shape: 'circularImage'
-        },
-        timeline: {
-          shape: 'circularImage'
+        'http://xmlns.com/foaf/0.1/Person': {
+          color: {
+            highlight: {
+              background: 'white',
+              border: '#860082'
+            },
+            background: 'white',
+            border: 'black'
+          },
+          image: 'bower_components/ml-visjs-graph-ng/dist/images/person.png'
         }
       },
       nodes: {
@@ -132,7 +128,12 @@
         shape: 'circularImage',
         image: 'bower_components/ml-visjs-graph-ng/dist/images/generic.png',
         color: {
-          background: 'white'
+          highlight: {
+            background: 'white',
+            border: '#860082'
+          },
+          background: 'white',
+          border: 'black'
         },
         font: {
           size: 12
@@ -225,6 +226,7 @@
         adaptiveTimestep: true
       },
       edges: {
+        color: '#860082',
         width: 2,
         shadow: true,
         arrows: {
