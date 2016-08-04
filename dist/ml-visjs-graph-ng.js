@@ -439,13 +439,6 @@
 
     ctrl.linkData = {};
 
-    $scope.$watch('items', function(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        items = newValue;
-        ctrl.clearAndUpdateGraph(newValue);
-      }
-    });
-
     $scope.$watch('ctrl.physicsEnabled', function(newValue, oldValue) {
       if (newValue !== oldValue) {
         ctrl.physicsUpdated();
@@ -486,23 +479,6 @@
       }
 
       return nodes;
-    };
-
-    ctrl.clearAndUpdateGraph = function(data) {
-      nodes.clear();
-      edges.clear();
-      nodeMap = {};
-
-      // Updated the watched <graphData> to force the network to re-initialize.
-      ctrl.graphData= {
-        nodes: nodes,
-        edges: edges
-      };
-
-      ctrl.updateGraph(data);
-      if (ctrl.network) {
-        ctrl.network.fit();
-      }
     };
 
     ctrl.updateGraph = function(data) {
