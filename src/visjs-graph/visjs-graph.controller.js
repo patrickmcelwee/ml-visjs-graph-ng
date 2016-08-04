@@ -316,11 +316,6 @@
       }
     };
 
-    ctrl.summaryCard = {
-      title: '',
-      object: {}
-    };
-    ctrl.showSummaryCard = false;
     ctrl.linkData = {};
 
     $scope.$watch('items', function(newValue, oldValue) {
