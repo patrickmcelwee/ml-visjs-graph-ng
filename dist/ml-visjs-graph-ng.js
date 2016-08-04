@@ -135,14 +135,11 @@
     var nodeMap = {};
 
     // TODO: Do we need this?
-    $scope.chartContainer = {};
     ctrl.newTriple = {};
     ctrl.tripleModal = null;
     ctrl.label = (items.nodes[0].label) ? items.nodes[0].label : 'this node';
 
     $window.scrollTo(0, 0);
-
-    ctrl.viewSummary = $scope.viewSummary;
 
     ctrl.graphData = {
       nodes: null,
