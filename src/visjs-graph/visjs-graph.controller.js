@@ -129,6 +129,8 @@
         borderWidth: 2,
         shadow: true,
         borderWidthSelected: 6,
+        shape: 'circularImage',
+        image: 'bower_components/ml-visjs-graph-ng/dist/images/generic.png',
         color: {
           background: 'white'
         },
@@ -164,7 +166,7 @@
           springLength: 200,
           springConstant: 0.04,
           damping: 0.5,
-          avoidOverlap: 1
+          avoidOverlap: 0
         },
 
         // built-in default
@@ -183,7 +185,7 @@
           springLength: 100,
           springConstant: 0.08,
           damping: 0.4,
-          avoidOverlap: 1
+          avoidOverlap: 0
         },
 
         // built-in default
