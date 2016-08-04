@@ -133,12 +133,6 @@
     var items = $scope.items;
     var nodes, edges;
     var nodeMap = {};
-    var useCurvedEdges = true;
-    var OPT_EDGE_CURVED = {
-      type: 'curvedCW',
-      roundness: 0.1
-    };
-    var OPT_EDGE_STRAIGHT = false;
 
     // TODO: Do we need this?
     $scope.chartContainer = {};
@@ -360,7 +354,10 @@
           size: 10,
           align: 'top'
         },
-        smooth: (useCurvedEdges ? OPT_EDGE_CURVED : OPT_EDGE_STRAIGHT)
+        smooth: {
+          type: 'curvedCW',
+          roundness: 0.1
+        }
       }
     };
 
@@ -581,22 +578,19 @@
     ctrl.layoutUpdated = function() {
       var options = {
         edges: {
-          smooth: (useCurvedEdges ? OPT_EDGE_CURVED : OPT_EDGE_STRAIGHT)
+        smooth: {
+          type: 'curvedCW',
+          roundness: 0.1
+        }
         }
       };
-      var physicsOptions = {
-        physics: {
-          enabled: ctrl.physicsEnabled,
-          solver: ctrl.physics
-        }
-      };
-
       if (ctrl.layoutSelect === 'standard') {
         options.layout = {
           hierarchical: false
         };
       }
       else if (ctrl.layoutSelect === 'hierarchyTop') {
+        ctrl.physics = 'hierarchicalRepulsion';
         options.layout = {
           hierarchical: {
             direction: 'UD',
@@ -605,6 +599,7 @@
         };
       }
       else if (ctrl.layoutSelect === 'hierarchyBottom') {
+        ctrl.physics = 'hierarchicalRepulsion';
         options.layout = {
           hierarchical: {
             direction: 'DU',
@@ -613,6 +608,7 @@
         };
       }
       else if (ctrl.layoutSelect === 'hierarchyLeft') {
+        ctrl.physics = 'hierarchicalRepulsion';
         options.layout = {
           hierarchical: {
             direction: 'LR',
@@ -621,6 +617,7 @@
         };
       }
       else {
+        ctrl.physics = 'hierarchicalRepulsion';
         options.layout = {
           hierarchical: {
             direction: 'RL',
@@ -628,6 +625,13 @@
           }
         };
       }
+
+      var physicsOptions = {
+        physics: {
+          enabled: ctrl.physicsEnabled,
+          solver: ctrl.physics
+        }
+      };
 
       // Set options for layout
       ctrl.network.setOptions(options);
