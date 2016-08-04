@@ -46,9 +46,9 @@
           var service = {
             search: search,
             expand: expand,
-            merge: merge,
-            addLinks: addLinks,
-            addTriple: addTriple
+            // merge: merge,
+            // addLinks: addLinks,
+            // addTriple: addTriple
 
           };
 
@@ -64,17 +64,17 @@
               });
           }
 
-          function merge(primaryId, secondaryId) {
-            return $http.post(api+'/merge?rs:primaryId=' + primaryId + '&rs:secondaryId=' + secondaryId);
-          }
+          // function merge(primaryId, secondaryId) {
+          //   return $http.post(api+'/merge?rs:primaryId=' + primaryId + '&rs:secondaryId=' + secondaryId);
+          // }
 
-          function addLinks(linkData) {
-            return $http.post(api+'/link', linkData);
-          }
+          // function addLinks(linkData) {
+          //   return $http.post(api+'/link', linkData);
+          // }
 
-          function addTriple(triple) {
-            return $http.post(api+'/visjs', triple);
-          }
+          // function addTriple(triple) {
+          //   return $http.post(api+'/visjs', triple);
+          // }
 
           return service;
         };
