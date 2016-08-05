@@ -295,21 +295,6 @@
                 ctx.strokeText(tmpNode.linkCount, nodePos.x - 20, nodePos.y - 24);
               }
 
-              // If this node is selected, add background to label
-              if (selectedNode === nodeIds[i]) {
-                ctx.font = 'bold 12px Arial';
-                var width = ctx.measureText(tmpNode.label).width + 40;
-                var xOffset = width / 2;
-
-                ctx.beginPath();
-                ctx.rect(nodePos.x - xOffset, nodePos.y + 30, width, 30);
-                ctx.fillStyle = '#860082';
-                ctx.fill();
-
-                ctx.strokeStyle = 'white';
-                ctx.fillStyle = 'white';
-                ctx.fillText(tmpNode.label, nodePos.x, nodePos.y + 40);
-              }
             }
           }
         }
