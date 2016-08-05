@@ -39,7 +39,7 @@ app](https://github.com/marklogic/slush-marklogic-node), add this to
 ```javascript
 angular.module('app', [
    # ...
-  'ml.visjsGraph,
+  'ml.visjsGraph',
   # ...
 ]);
 ```
@@ -74,10 +74,11 @@ triples.
 
 This code repository has the same JSON documents, enriched with triples
 representing foaf:knows relationships, an rdf:type, and an rdfs:label for each
-document. To use, you can replace the original `sample-data.zip` file in the
-slush-generated app with the `sample-data.zip` file in this project.
-(Eventually, the slush-generated app may use this project's version with
-triples.)
+document. One document also includes a rdfs:label for foaf:knows, so that it
+displays on the graph as 'knows' rather than the more verbose 'foaf:knows'. To
+use, you can replace the original `sample-data.zip` file in the slush-generated
+app with the `sample-data.zip` file in this project. (Eventually, the
+slush-generated app may use this project's version with triples.)
 
 Then, you can load them with
 (MLCP)[https://docs.marklogic.com/guide/ingestion/content-pump] like this:
