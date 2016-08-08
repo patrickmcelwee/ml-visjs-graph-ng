@@ -18,15 +18,29 @@ Install the [mlpm module](https://github.com/patrickmcelwee/mlpm-visjs-graph):
     mlpm install visjs-graph --save
     mlpm deploy -H localhost -P 8040 -u admin -p admin
 
-Also, since this library works based on SPARQL queries against triples stored
-in your MarkLogic database, you need to enable the triple index. Unless you
-know better, you should do this in `deploy/ml-config.xml` of your application.
+### Enable the triple index
+
+Since this library works based on SPARQL queries against triples stored
+in your MarkLogic database, you need to enable the triple index. 
+
+#### Using Roxy
+
+Unless you now better, you should do this in `deploy/ml-config.xml` of your application.
 Add the following line to the `<database></database>` configuration for the
 database with name `<database-name>${content-db}</database-name>` (around line
 179 at the time of this writing).
 
 ```xml
       <triple-index>true</triple-index>
+```
+
+#### Using ml-gradle
+
+Update the ```src/main/ml-config/databases/content-database.json``` file for your application 
+to include the following property:
+
+```json
+  "triple-index": true
 ```
 
 ## Example Implementation
