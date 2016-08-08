@@ -44,26 +44,16 @@ angular.module('app', [
 ]);
 ```
 
-You can add a link to the VisJS graph for a document by adding the following
-HTML snippet to a template:
+You can add a VisJS graph for a document by adding the following HTML snippet
+to a template, for example to `ui/app/detail/detail.html`:
 
 ```html
-<a ui-sref="root.visjs-graph({id: docUri})">Go to the VisJS graph for {{docUri}}</a>
+<visjs-graph uris="[ctrl.uri]"></visjs-graph>
 ```
 
-For example, in a slush-generated app, you can add this markup to
-`ui/app/detail/detail.html`:
-
-```html
-<div class="col-sm-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">Graph</div>
-    <div class="panel-body" style="min-height: 50px;">
-      Explore triples for <a ui-sref="root.visjs-graph({id: ctrl.uri})">{{ctrl.uri}}</a>
-    </div>
-  </div>
-</div>
-```
+NOTE: Support for multiple uris is not yet provided, but that future extension
+is anticipated by this API. For now, it will only initialize the graph
+visualization with the first uri in the list provided to the directive.
 
 ## Sample Data
 
@@ -90,6 +80,8 @@ Or on Windows:
     ml.bat local mlcp -options_file import-sample-data.options
 
 ## Directives Provided
+
+### `visjs-graph`
 
 TODO
 

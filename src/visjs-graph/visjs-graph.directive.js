@@ -9,7 +9,7 @@
     return {
       restrict: 'E',
       scope: {
-        items: '=items'
+        uris: '=uris'
       },
       templateUrl: '/visjs-graph/visjs-graph.html',
       controller: 'visjsGraphCtrl',

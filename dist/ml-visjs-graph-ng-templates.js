@@ -17,18 +17,6 @@ try {
   module = angular.module('ml.visjsGraph', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('/visjs-graph/templates/container.html',
-    '<div class="row">{{visjsGraphViewCtrl.items}}<visjs-graph items="ctrl.items"></visjs-graph></div>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('ml.visjsGraph');
-} catch (e) {
-  module = angular.module('ml.visjsGraph', []);
-}
-module.run(['$templateCache', function($templateCache) {
   $templateCache.put('/visjs-graph/templates/name-link.html',
     '<div><div class="panel panel-default"><div class="panel-heading">Add a link</div><div class="panel-body"><div class="form-group"><label for="object">Name the link from <i>{{ctrl.newTriple.s}}</i> to <i>{{ctrl.newTriple.o}}</i></label> <input type="text" class="form-control" ng-model="ctrl.newTriple.p" placeholder="linkedTo"></div><button class="btn btn-default btn-sm" ng-click="ctrl.addNewTriple()">Add link</button> <button class="btn btn-default btn-sm" ng-click="ctrl.cancelLink()">Cancel</button></div></div></div>s');
 }]);
