@@ -25,7 +25,7 @@ in your MarkLogic database, you need to enable the triple index.
 
 #### Using Roxy
 
-Unless you now better, you should do this in `deploy/ml-config.xml` of your application.
+You should do this in `deploy/ml-config.xml` of your application.
 Add the following line to the `<database></database>` configuration for the
 database with name `<database-name>${content-db}</database-name>` (around line
 179 at the time of this writing).
