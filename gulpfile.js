@@ -8,7 +8,9 @@ var gulp = require('gulp'),
     html2Js = require('gulp-ng-html2js'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
-    jshint = require('gulp-jshint');
+    jshint = require('gulp-jshint'),
+    templateCache = require('gulp-angular-templatecache'),
+    del = require('del');
 
 gulp.task('jshint', function() {
   gulp.src([
@@ -72,8 +74,36 @@ gulp.task('images', function() {
  *  gulp test --startServers
  * @param  {Function} done - callback when complete
  */
-gulp.task('test', ['jshint'], function(done) {
+gulp.task('test', ['jshint', 'templatecache'], function(done) {
   startTests(true /*singleRun*/, done);
+});
+
+/**
+ * Create $templateCache from the html templates
+ * @return {Stream}
+ */
+gulp.task('templatecache', ['clean-code'], function() {
+  return gulp
+    .src('src/**/*.html')
+    .pipe(templateCache(
+      'templates.js',
+      {
+        module: 'ml.visjsGraph',
+        transformUrl: function (url) {return '/' + url;}
+      }
+      ))
+    .pipe(gulp.dest('./.tmp/'));
+});
+
+/**
+ * Remove all js and html from the build and temp folders
+ * @return {Stream}
+ */
+gulp.task('clean-code', function() {
+  var files = [].concat(
+    './.tmp/**/*.js'
+  );
+  return del(files);
 });
 
 /**

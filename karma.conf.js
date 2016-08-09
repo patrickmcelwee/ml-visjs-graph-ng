@@ -7,6 +7,14 @@
 
 module.exports = function(config) {
   // var gulpConfig = require('./gulp.config')();
+  var wiredep = require('wiredep');
+  var bowerFiles = wiredep({
+    devDependencies: true,
+    bowerJson: require('./bower.json'),
+    directory: './bower_components/',
+    ignorePath: '..',
+    exclude: [ 'requirejs', 'angularjs', 'font-awesome.css' ]
+  }).js;
 
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -17,7 +25,11 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
-    files: ['test/**/*.js'],
+    files: bowerFiles.concat([
+      'src/**/*.js',
+      'test/**/*.js',
+      './.tmp/templates.js'
+    ]),
 
     // list of files to exclude
     // exclude: gulpConfig.karma.exclude,
