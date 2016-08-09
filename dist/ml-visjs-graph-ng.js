@@ -3,8 +3,7 @@
   
   angular.module('ml.visjsGraph', [
     'ngVis',
-    'ui.bootstrap',
-    'ui.router'
+    'ui.bootstrap'
   ]);
 
 })();

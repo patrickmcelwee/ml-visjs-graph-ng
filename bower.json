@@ -11,9 +11,7 @@
     "dist/ml-visjs-graph-ng-templates.js"
   ],
   "dependencies": {
-    "angular": "~1.4.4",
     "angular-bootstrap": "^1.1",
-    "angular-ui-router": "^0.2.15",
     "angular-visjs": "https://github.com/visjs/angular-visjs.git#8a825e40852d29355a752ee1c30e28b3d989a1a8",
     "vis": "~4.16.1"
   },
