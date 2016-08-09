@@ -66,4 +66,49 @@ gulp.task('images', function() {
     .pipe(gulp.dest('dist/images'));
 });
 
-gulp.task('default', ['jshint', 'scripts', 'templates', 'styles', 'images']);
+/**
+ * Run specs once and exit
+ * To start servers and run midway specs as well:
+ *  gulp test --startServers
+ * @param  {Function} done - callback when complete
+ */
+gulp.task('test', ['jshint'], function(done) {
+  startTests(true /*singleRun*/, done);
+});
+
+/**
+ * Run specs and wait.
+ * Watch for file changes and re-run tests on each change
+ * To start servers and run midway specs as well:
+ *  gulp autotest --startServers
+ * @param  {Function} done - callback when complete
+ */
+gulp.task('autotest', function(done) {
+  startTests(false /*singleRun*/, done);
+});
+
+function startTests(singleRun, done) {
+  var child;
+  var excludeFiles = [];
+  var Server = require('karma').Server;
+
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    exclude: excludeFiles,
+    singleRun: !!singleRun
+  }, karmaCompleted).start();
+  ////////////////
+
+  function karmaCompleted(karmaResult) {
+    if (child) {
+      child.kill();
+    }
+    if (karmaResult === 1) {
+      done(new Error('karma: tests failed with code ' + karmaResult));
+    } else {
+      done();
+    }
+  }
+}
+
+gulp.task('default', ['jshint', 'test', 'scripts', 'templates', 'styles', 'images']);
