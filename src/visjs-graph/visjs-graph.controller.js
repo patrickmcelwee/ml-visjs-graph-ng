@@ -5,9 +5,9 @@
   angular.module('ml.visjsGraph')
     .controller('visjsGraphCtrl', visjsGraphCtrl);
 
-  visjsGraphCtrl.$inject = ['visjsGraphService', '$scope', '$state', '$window', '$uibModal', 'VisDataSet'];
+  visjsGraphCtrl.$inject = ['visjsGraphService', '$scope', '$location', '$window', '$uibModal', 'VisDataSet'];
 
-  function visjsGraphCtrl(visjsGraphService, $scope, $state, $window, $uibModal, VisDataSet) {
+  function visjsGraphCtrl(visjsGraphService, $scope, $location, $window, $uibModal, VisDataSet) {
     var ctrl = this;
     var items; 
     var nodes, edges;
@@ -247,7 +247,8 @@
           var targetNode = ctrl.network.getNodeAt(coordinates);
           if (targetNode) {
            if(ctrl.getNodeLabel(targetNode).charAt(0) !== '/') {
-              $state.go('root.view', {'uri': targetNode});
+             $location.path('/detail' + targetNode);
+             $scope.$apply();
             }
           }
 

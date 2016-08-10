@@ -22,8 +22,7 @@ describe('visjsGraphCtrl', function() {
     scope.uris = ['some-uri.xml', 'some-extra-uri.xml'];
     var controller = $controller('visjsGraphCtrl', {
       $scope: scope,
-      visjsGraphService: visjsGraphService,
-      $state: {} // TODO: remove this dependency on angular-ui-router
+      visjsGraphService: visjsGraphService
     });
     expect(visjsGraphService.search).toHaveBeenCalledWith('some-uri.xml');
   });
