@@ -247,7 +247,7 @@
           var targetNode = ctrl.network.getNodeAt(coordinates);
           if (targetNode) {
            if(ctrl.getNodeLabel(targetNode).charAt(0) !== '/') {
-              $state.go('root.view', {'uri': targetNode + '.xml'});
+              $state.go('root.view', {'uri': targetNode});
             }
           }
 
