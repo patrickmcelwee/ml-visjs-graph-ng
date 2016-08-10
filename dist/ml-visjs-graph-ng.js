@@ -88,11 +88,11 @@
   'use strict';
 
   angular.module('ml.visjsGraph')
-    .controller('visjsGraphCtrl', VisjsGraphCtrl);
+    .controller('visjsGraphCtrl', visjsGraphCtrl);
 
-  VisjsGraphCtrl.$inject = ['visjsGraphService', '$scope', '$state', '$window', '$uibModal', 'VisDataSet'];
+  visjsGraphCtrl.$inject = ['visjsGraphService', '$scope', '$state', '$window', '$uibModal', 'VisDataSet'];
 
-  function VisjsGraphCtrl(visjsGraphService, $scope, $state, $window, $uibModal, VisDataSet) {
+  function visjsGraphCtrl(visjsGraphService, $scope, $state, $window, $uibModal, VisDataSet) {
     var ctrl = this;
     var items; 
     var nodes, edges;
