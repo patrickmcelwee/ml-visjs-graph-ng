@@ -62,7 +62,7 @@ You can add a VisJS graph for a document by adding the following HTML snippet
 to a template, for example to `ui/app/detail/detail.html`:
 
 ```html
-<visjs-graph uris="[ctrl.uri]"></visjs-graph>
+<ml-visjs-graph uris="[ctrl.uri]"></ml-visjs-graph>
 ```
 
 NOTE: Support for multiple uris is not yet provided, but that future extension
@@ -95,7 +95,7 @@ Or on Windows:
 
 ## Directives Provided
 
-### `visjs-graph`
+### `ml-visjs-graph`
 
 TODO
 

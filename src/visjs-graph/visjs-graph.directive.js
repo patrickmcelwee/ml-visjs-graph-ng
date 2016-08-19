@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('ml.visjsGraph')
-  .directive('visjsGraph', VisjsGraphDirective);
+  .directive('mlVisjsGraph', VisjsGraphDirective);
 
   function VisjsGraphDirective() {
     return {
