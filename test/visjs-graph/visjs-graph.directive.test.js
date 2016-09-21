@@ -1,4 +1,4 @@
-describe('visjs-graph directive', function () {
+describe('ml-visjs-graph directive', function () {
   var $compile,
       $rootScope;
 
@@ -17,7 +17,7 @@ describe('visjs-graph directive', function () {
     $rootScope = _$rootScope_;
   }));
 
-  it('Replaces <visjs-graph> with the network visualization', function() {
+  it('Replaces <ml-visjs-graph> with the network visualization', function() {
     var element = $compile('<ml-visjs-graph></ml-visjs-graph>')($rootScope);
     $rootScope.$digest();
     expect(element.html()).toContain('<vis-network'); // angular-visjs directive
