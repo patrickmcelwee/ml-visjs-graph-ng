@@ -1,5 +1,5 @@
 describe('visjsGraphCtrl', function() {
-  var $controller, visjsGraphService;
+  var $controller, $q;
 
   beforeEach(module('ml.visjsGraph'));
 
@@ -11,19 +11,20 @@ describe('visjsGraphCtrl', function() {
     $rootScope = _$rootScope_;
     $controller = _$controller_;
     $q = _$q_;
-    visjsGraphService = _visjsGraphService_;
   }));
 
-  // TODO: handle multiple URIs in a better way
-  it('should call visjsGraphService.search() with first uri', function() {
-    var mockPromise = $q.when();
-    spyOn(visjsGraphService, 'search').and.returnValue(mockPromise);
+  // Out of date: this now moved to directive
+  it('should call $scope.graphSearch() when it is set', function() {
+    var mockResults = {nodes: [], edges: []};
+    var uris = ['some-uri.xml', 'some-extra-uri.xml'];
     var scope = $rootScope.$new();
-    scope.uris = ['some-uri.xml', 'some-extra-uri.xml'];
+    var mockSearch = jasmine.createSpy('search').and.returnValue($q.when(mockResults));
+    scope.uris = uris;
     var controller = $controller('visjsGraphCtrl', {
-      $scope: scope,
-      visjsGraphService: visjsGraphService
+      $scope: scope
     });
-    expect(visjsGraphService.search).toHaveBeenCalledWith('some-uri.xml');
+    scope.graphSearch = mockSearch; // defined in directive
+    scope.$apply();
+    expect(mockSearch).toHaveBeenCalledWith(uris);
   });
 });
