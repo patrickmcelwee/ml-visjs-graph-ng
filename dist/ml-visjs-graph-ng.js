@@ -31,14 +31,18 @@
 
           };
 
-          function search(id) {
-            return $http.get(api+'/visjs?rs:subject='+id);
+          function search(ids) {
+            return $http.get(api+'/visjs?rs:subject=' + ids[0]).then(
+              function(response) {
+                return response.data;
+              }
+            );
           }
 
-          function expand(id) {
-            return $http.get(api+'/visjs?rs:expand=true&rs:subject=' + encodeURIComponent(id)).then(
+          function expand(ids) {
+            return $http.get(
+              api+'/visjs?rs:expand=true&rs:subject=' + ids[0]).then(
               function (response) {
-                // The items are in the HTTP response's data.
                 return response.data;
               });
           }
@@ -67,16 +71,26 @@
   angular.module('ml.visjsGraph')
   .directive('mlVisjsGraph', VisjsGraphDirective);
 
-  function VisjsGraphDirective() {
+  VisjsGraphDirective.$inject = ['visjsGraphService'];
+
+  function VisjsGraphDirective(visjsGraphService) {
     return {
       restrict: 'E',
       scope: {
-        uris: '=uris'
+        uris: '=',
+        graphSearch: '=?',
+        graphExpand: '=?'
       },
       templateUrl: '/visjs-graph/visjs-graph.html',
       controller: 'visjsGraphCtrl',
       controllerAs: 'ctrl',
-      link: function(scope, element, attrs) {
+      link: function($scope, element, attrs) {
+        if (!attrs.graphSearch) {
+          $scope.graphSearch = visjsGraphService.search;
+        }
+        if (!attrs.graphExpand) {
+          $scope.graphExpand = visjsGraphService.expand;
+        }
       }
     };
   }
@@ -90,47 +104,38 @@
   angular.module('ml.visjsGraph')
     .controller('visjsGraphCtrl', visjsGraphCtrl);
 
-  visjsGraphCtrl.$inject = ['visjsGraphService', '$scope', '$location', '$window', '$uibModal', 'VisDataSet'];
+  visjsGraphCtrl.$inject = ['$scope', '$location', '$window', '$uibModal', 'VisDataSet'];
 
-  function visjsGraphCtrl(visjsGraphService, $scope, $location, $window, $uibModal, VisDataSet) {
+  function visjsGraphCtrl($scope, $location, $window, $uibModal, VisDataSet) {
     var ctrl = this;
-    var items; 
-    var nodes, edges;
+    var nodes = new VisDataSet([]);
+    var edges = new VisDataSet([]);
     var nodeMap = {};
 
-    visjsGraphService.search($scope.uris[0]).then(function(resp) {
-      items = resp.data;
-      ctrl.init();
-    });
-
-    ctrl.init = function() {
+    var init = function() {
       // TODO: Do we need this?
       ctrl.newTriple = {};
       ctrl.tripleModal = null;
-      ctrl.label = (items.nodes[0].label) ? items.nodes[0].label : 'this node';
+      if ($scope.items.nodes[0] && $scope.items.nodes[0].label) {
+        ctrl.label = $scope.items.nodes[0].label;
+      } else {
+        ctrl.label = 'this node';
+      }
 
-      ctrl.graphData = {
-        nodes: null,
-        edges: null
-      };
-
-      if (items) {
+      if ($scope.items) {
         // Add nodes to nodeMap
-        for (var i=0; i < items.nodes.length; i++) {
-          nodeMap[items.nodes[i].id] = items.nodes[i];
+        for (var i=0; i < $scope.items.nodes.length; i++) {
+          nodeMap[$scope.items.nodes[i].id] = $scope.items.nodes[i];
         }
 
-        nodes = new VisDataSet(items.nodes);
-        edges = new VisDataSet(items.links);
-      }
-      else {
-        nodes = new VisDataSet([]);
-        edges = new VisDataSet([]);
+        ctrl.refreshGraph();
       }
 
       // provide the data in the vis format
-      ctrl.graphData.nodes = nodes;
-      ctrl.graphData.edges = edges;
+      ctrl.graphData = {
+        nodes: nodes,
+        edges: edges
+      };
 
       ctrl.physicsEnabled = true;
       ctrl.physics = 'forceAtlas2Based';
@@ -341,7 +346,7 @@
         },
         doubleClick: function(params) {
           var nodeUri = params.nodes[0];
-          visjsGraphService.expand(nodeUri).then(ctrl.updateGraph);
+          $scope.graphExpand([nodeUri]).then(ctrl.updateGraph);
         },
         afterDrawing: function(ctx) {
           var radius = 10;
@@ -473,6 +478,12 @@
       };
     };
 
+    $scope.$watch('graphSearch', function() {
+      $scope.graphSearch($scope.uris).then(function(items) {
+        $scope.items = items;
+        init();
+      });
+    });
 
     $scope.$watch('ctrl.physicsEnabled', function(newValue, oldValue) {
       if (newValue !== oldValue) {
@@ -517,17 +528,12 @@
     };
 
     ctrl.updateGraph = function(data) {
-      if (data && data.data) {
-        items = data.data;
-      }
-      else {
-        items = data;
-      }
+      $scope.items = data;
 
       // Add nodes to nodeMap
-      if (items && items.nodes) {
-        for (var i=0; i < items.nodes.length; i++) {
-          nodeMap[items.nodes[i].id] = items.nodes[i];
+      if ($scope.items && $scope.items.nodes) {
+        for (var i=0; i < $scope.items.nodes.length; i++) {
+          nodeMap[$scope.items.nodes[i].id] = $scope.items.nodes[i];
         }
 
         ctrl.refreshGraph();
@@ -535,12 +541,13 @@
     };
 
     ctrl.refreshGraph = function() {
-      if (nodes) {
-        nodes.update(items.nodes);
-      }
-
-      if (edges) {
-        edges.update(items.links);
+      nodes.update($scope.items.nodes);
+      // allow 'links' instead of 'edges' for backwards compatibility
+      // with the visjs-graph mlpm  library
+      if ($scope.items.edges) {
+        edges.update($scope.items.edges);
+      } else if ($scope.items.links) {
+        edges.update($scope.items.links);
       }
     };
 

@@ -12,7 +12,7 @@ Install this library:
 
     bower install ml-visjs-graph-ng --save
 
-Install the [mlpm module](https://github.com/patrickmcelwee/mlpm-visjs-graph):
+If you want to use the default graphSearch and graphExpand functions, which return the node and link data powering the graph, you need to install the [mlpm module](https://github.com/patrickmcelwee/mlpm-visjs-graph) (if you want to [create your own](#custom-graph-search), you could use this mlpm_module code as a starting point or roll your own):
 
     npm install -g mlpm
     mlpm install visjs-graph --save
@@ -68,6 +68,57 @@ to a template, for example to `ui/app/detail/detail.html`:
 NOTE: Support for multiple uris is not yet provided, but that future extension
 is anticipated by this API. For now, it will only initialize the graph
 visualization with the first uri in the list provided to the directive.
+
+### Override default graphSearch and graphExpand<a name="custom-graph-search"></a>
+
+You can override the default graphSearch and/or graphExpand in order to provide custom data provider. functions Specify them in the directive:
+
+
+```html
+<ml-visjs-graph uris="[ctrl.uri]" graph-search="myGraphSearch" graph-expand="myGraphExpand"></ml-visjs-graph>
+```
+
+- the graphSearch function is called when the graph is initialized. It takes as its first and only argument an array of URIs (the ones you pass to the directive)
+- the graphExpand function is called when the user wants to expand a particular node, or potentially nodes. 
+
+Both methods should return a promise that resolves to an object with two properties, `nodes` and `edges`, each containing an array. The `expand` function does not need to provide a full picture of the graph nodes and edges. Each node/edge it does return will either be updated or added. Existing nodes and edges will not be removed. This is a canned example that would work as a replacement for either graphSearch or graphExpand:
+  
+```javascript
+function cannedSearch(uris) {
+  return $q.when({
+    nodes: [
+      {
+        id: '1',
+        label: 'The Number 1!',
+        group: 'number', // optional
+        linkCount: 8 // we look for this to add an small orb to the icon
+      },
+      {
+        id: '2',
+        label: 'The Only Even Prime!',
+        group: 'number', // optional
+        linkCount: 16 // we look for this to add an small orb to the icon
+      }
+    ],
+    edges: [
+      {
+        id: 'more-2-1',
+        label: 'moreThan',
+        from: '2',
+        to: '1'
+      }
+    ]
+  });
+}
+```
+
+See the VisJS [nodes](http://visjs.org/docs/network/nodes.html) and [edges](http://visjs.org/docs/network/edges.html) documentation for additional VisJS properties you can add. You may also add additional, non-VisJS properties if you wish (for example, to provide content to a summary pane when a node is clicked).
+
+The default functions are provided by the [`visjsGraphService`](https://github.com/patrickmcelwee/ml-visjs-graph-ng/blob/master/src/visjs-graph/visjs-graph.service.js), which simply calls a MarkLogic REST extension called `visjs`. (This offers an additional way to override the built-in functionality, by creating a different 'visjs' REST extension.)
+
+## More Information
+
+I recommend becoming familiar with the [documentation for a VisJS network](http://visjs.org/docs/network/).
 
 ## Sample Data
 
