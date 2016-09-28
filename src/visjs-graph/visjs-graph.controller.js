@@ -163,50 +163,39 @@
         $scope.graphExpand([nodeUri]).then(ctrl.updateGraph);
       },
       afterDrawing: function(ctx) {
-        var radius = 10;
-        var selectedNode = null;
-        var selectedData = $scope.network.getSelectedNodes();
-        if (selectedData && selectedData.length > 0) {
-          selectedNode = selectedData[0];
-        }
+        var nodePositions = $scope.network.getPositions();
+        nodes.forEach(function(node) {
+          var nodePosition = nodePositions[node.id];
 
-        var nodeIds = nodes.getIds();
-        var nodePosition = $scope.network.getPositions(nodeIds);
-        if (nodePosition) {
-          for (var i=0; i < nodeIds.length; i++) {
-            var nodePos = nodePosition[ nodeIds[i] ];
-            if (nodePos) {
-              var tmpNode = nodes.get(nodeIds[i]);
-              // Backwards compatibility
-              if (tmpNode && tmpNode.linkCount) {
-                tmpNode.edgeCount = tmpNode.linkCount;
-              }
-              if (tmpNode && tmpNode.edgeCount && tmpNode.edgeCount > 0) {
-                if (tmpNode.edgeCount >= 100 && tmpNode.edgeCount < 1000) {
-                  radius = 15;
-                }
-                else if (tmpNode.edgeCount >= 1000) {
-                  radius = 20;
-                }
-                else {
-                  radius = 10;
-                }
-
-                ctx.strokeStyle = 'white';
-                ctx.fillStyle = '#848484';
-                ctx.lineWidth = 1;
-                ctx.circle(nodePos.x - 20, nodePos.y - 20, radius);
-                ctx.fill();
-                ctx.stroke();
-
-                // Text info
-                ctx.font = '8pt Lucida';
-                ctx.strokeText(tmpNode.edgeCount, nodePos.x - 20, nodePos.y - 24);
-              }
-
-            }
+          // Backwards compatibility
+          if (node.linkCount) {
+            node.edgeCount = node.linkCount;
           }
-        }
+
+          if (node.edgeCount && node.edgeCount > 0) {
+            var radius;
+            if (node.edgeCount >= 100 && node.edgeCount < 1000) {
+              radius = 15;
+            }
+            else if (node.edgeCount >= 1000) {
+              radius = 20;
+            }
+            else {
+              radius = 10;
+            }
+
+            ctx.strokeStyle = 'white';
+            ctx.fillStyle = '#848484';
+            ctx.lineWidth = 1;
+            ctx.circle(nodePosition.x - 20, nodePosition.y - 20, radius);
+            ctx.fill();
+            ctx.stroke();
+
+            // Text info
+            ctx.font = '8pt Lucida';
+            ctx.strokeText(node.edgeCount, nodePosition.x - 20, nodePosition.y - 24);
+          }
+        });
       }
     };
 
