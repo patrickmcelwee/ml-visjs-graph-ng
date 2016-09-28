@@ -149,15 +149,15 @@
 
     ctrl.graphEvents = {
       onload: function(network) {
-        ctrl.network = network;
+        $scope.network = network;
       },
       stabilized: function() {
-        ctrl.network.fit();
+        $scope.network.fit();
       },
       // Right-click for a redirect to the detail page for a node
       oncontext: function(params) {
         var coordinates = params.pointer.DOM;
-        var targetNode = ctrl.network.getNodeAt(coordinates);
+        var targetNode = $scope.network.getNodeAt(coordinates);
         if (targetNode) {
          if(ctrl.getNodeLabel(targetNode).charAt(0) !== '/') {
            $location.path('/detail' + targetNode);
@@ -174,13 +174,13 @@
       afterDrawing: function(ctx) {
         var radius = 10;
         var selectedNode = null;
-        var selectedData = ctrl.network.getSelectedNodes();
+        var selectedData = $scope.network.getSelectedNodes();
         if (selectedData && selectedData.length > 0) {
           selectedNode = selectedData[0];
         }
 
         var nodeIds = ctrl.getNodeIds();
-        var nodePosition = ctrl.network.getPositions(nodeIds);
+        var nodePosition = $scope.network.getPositions(nodeIds);
         if (nodePosition) {
           for (var i=0; i < nodeIds.length; i++) {
             var nodePos = nodePosition[ nodeIds[i] ];
@@ -220,12 +220,12 @@
     };
 
     ctrl.physicsUpdated = function() {
-      if(ctrl.network) {
-        ctrl.network.setOptions({ physics: {
+      if($scope.network) {
+        $scope.network.setOptions({ physics: {
           enabled: ctrl.physicsEnabled,
           solver: ctrl.physics
         }});
-        ctrl.network.stabilize();
+        $scope.network.stabilize();
       }
     };
 
@@ -289,9 +289,9 @@
       };
 
       // Set options for layout
-      if (ctrl.network) {
-        ctrl.network.setOptions(options);
-        ctrl.network.stabilize();
+      if ($scope.network) {
+        $scope.network.setOptions(options);
+        $scope.network.stabilize();
       }
 
       //
@@ -300,8 +300,8 @@
       // NOTE:  Needed second call to <setOptions> because the physics
       //        settings were being overwritten based on layout setting.
       //
-      if (ctrl.network) {
-        ctrl.network.setOptions(physicsOptions);
+      if ($scope.network) {
+        $scope.network.setOptions(physicsOptions);
       }
     };
 
@@ -324,11 +324,18 @@
       ctrl.layoutUpdated();
     }
 
-    $scope.$watch('graphSearch', function() {
+    $scope.$watch('graphSearch', function(newValue, oldValue) {
       $scope.graphSearch($scope.uris).then(function(items) {
         $scope.items = items;
         init();
       });
+    });
+
+    $scope.$watch('customGraphOptions', function(newValue, oldValue) {
+      angular.merge(ctrl.graphOptions, newValue);
+      if ($scope.network) {
+        $scope.network.setOptions(newValue);
+      }
     });
 
     $scope.$watch('ctrl.physicsEnabled', function(newValue, oldValue) {
