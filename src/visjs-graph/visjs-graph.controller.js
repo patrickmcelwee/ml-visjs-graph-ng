@@ -294,9 +294,7 @@
         ctrl.label = 'this node';
       }
 
-      if ($scope.items) {
-        ctrl.refreshGraph();
-      }
+      ctrl.refreshGraph();
       ctrl.physicsUpdated();
       ctrl.layoutUpdated();
     }
@@ -337,20 +335,19 @@
 
     ctrl.updateGraph = function(data) {
       $scope.items = data;
-
-      if ($scope.items && $scope.items.nodes) {
-        ctrl.refreshGraph();
-      }
+      ctrl.refreshGraph();
     };
 
     ctrl.refreshGraph = function() {
-      nodes.update($scope.items.nodes);
-      // allow 'links' instead of 'edges' for backwards compatibility
-      // with the visjs-graph mlpm  library
-      if ($scope.items.edges) {
-        edges.update($scope.items.edges);
-      } else if ($scope.items.links) {
-        edges.update($scope.items.links);
+      if ($scope.items) {
+        nodes.update($scope.items.nodes);
+        // allow 'links' instead of 'edges' for backwards compatibility
+        // with the visjs-graph mlpm  library
+        if ($scope.items.edges) {
+          edges.update($scope.items.edges);
+        } else if ($scope.items.links) {
+          edges.update($scope.items.links);
+        }
       }
     };
 
