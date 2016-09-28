@@ -13,7 +13,8 @@
       scope: {
         uris: '=',
         graphSearch: '=?',
-        graphExpand: '=?'
+        graphExpand: '=?',
+        customGraphOptions: '=?graphOptions'
       },
       templateUrl: '/visjs-graph/visjs-graph.html',
       controller: 'visjsGraphCtrl',

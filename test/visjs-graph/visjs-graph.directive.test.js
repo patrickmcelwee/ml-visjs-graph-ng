@@ -16,14 +16,8 @@ describe('ml-visjs-graph directive', function () {
 
       $provide.service('visjsGraphService', function($q) {
         var mockPromise = $q.when(['item1', 'item2']);
-        this.search =
-          jasmine.createSpy('search').and.callFake(function(uri) {
-            return mockPromise;
-          });
-        this.expand =
-          jasmine.createSpy('expand').and.callFake(function(uri) {
-            return mockPromise;
-          });
+        this.search = jasmine.createSpy('search');
+        this.expand = jasmine.createSpy('expand');
       });
     });
 

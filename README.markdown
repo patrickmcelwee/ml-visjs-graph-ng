@@ -69,6 +69,16 @@ NOTE: Support for multiple uris is not yet provided, but that future extension
 is anticipated by this API. For now, it will only initialize the graph
 visualization with the first uri in the list provided to the directive.
 
+### Override VisJS graphOptions
+
+VisJS provides a [robust set of options to change how your graph is displayed](http://visjs.org/docs/network/#options). We have specified a default set of options in the [visjsGraphCtrl](https://github.com/patrickmcelwee/ml-visjs-graph-ng/blob/master/src/visjs-graph/visjs-graph.controller.js). You can override these by passing an object to `graph-options` in the `ml-visjs-graph` directive. (Only the specific options you name will be changed. If you want to return to the VisJS default for an option that we have set in the visjsGraphCtrl, you will have to specify that explicitly.)
+
+For example:
+
+```html
+<ml-visjs-graph uris="[ctrl.uri]" graph-options="{edges: {color: 'red'}, nodes: {color: {background: 'orange'}}}"></ml-visjs-graph>
+```
+
 ### Override default graphSearch and graphExpand<a name="custom-graph-search"></a>
 
 You can override the default graphSearch and/or graphExpand in order to provide custom data provider. functions Specify them in the directive:
