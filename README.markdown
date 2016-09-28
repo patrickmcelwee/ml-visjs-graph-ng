@@ -79,7 +79,18 @@ For example:
 <ml-visjs-graph uris="[ctrl.uri]" graph-options="{edges: {color: 'red'}, nodes: {color: {background: 'orange'}}}"></ml-visjs-graph>
 ```
 
-### Override VisJS graphEvents
+### VisJS graphEvents
+
+#### Default Behaviors
+
+The default event hooks for this library are: 
+
+- the visualization autofits all nodes each time it stabilizes,
+- right-click on a node goes to the `/detail` page for that node,
+- double-click expands a node,
+- each node has a custom orb in the top-left which specifies how many relationship that node has
+
+#### Override or extend VisJS graphEvents
 
 VisJS also provides [many event hooks for you to add behavior or draw on the canvas](http://visjs.org/docs/network/#Events). We have specified several in the [visjsGraphCtrl](https://github.com/patrickmcelwee/ml-visjs-graph-ng/blob/master/src/visjs-graph/visjs-graph.controller.js). You can override these or add additional event hooks by passing an object to `graph-events` in the `ml-visjs-graph` directive. (If you want to remove one of the event hooks defined in this library, you will have to specify an empty, 'no-op' function.)
 

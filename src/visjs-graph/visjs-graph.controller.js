@@ -154,12 +154,9 @@
         var coordinates = params.pointer.DOM;
         var targetNode = $scope.network.getNodeAt(coordinates);
         if (targetNode) {
-         if(ctrl.getNodeLabel(targetNode).charAt(0) !== '/') {
-           $location.path('/detail' + targetNode);
-           $scope.$apply();
-          }
+          $location.path('/detail' + targetNode);
+          $scope.$apply();
         }
-
         return params.event.preventDefault();
       },
       doubleClick: function(params) {
@@ -350,11 +347,6 @@
     $scope.$watch('layout', function(newValue, oldValue) {
       ctrl.layoutUpdated();
     });
-
-    ctrl.getNodeLabel = function(nodeId) {
-      var label = nodeMap[nodeId].label;
-      return label;
-    };
 
     ctrl.getNode = function(nodeId) {
       return nodeMap[nodeId];
