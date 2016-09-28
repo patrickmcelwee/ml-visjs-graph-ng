@@ -18,10 +18,6 @@
       edges: edges
     };
 
-    ctrl.physicsEnabled = true;
-    ctrl.physics = 'forceAtlas2Based';
-    ctrl.layoutSelect = 'standard';
-
     ctrl.graphOptions = {
       layout: {
         hierarchical: false,
@@ -51,7 +47,7 @@
         },
       },
       physics: {
-        enabled: ctrl.physicsEnabled,
+        enabled: false,
 
         // OBI default
         // barnesHut: {
@@ -116,7 +112,6 @@
         },
         maxVelocity: 150, // default 50
         minVelocity: 6, // default 0.1
-        solver: ctrl.physics, // default barnesHut
         stabilization: {
           enabled: true,
           iterations: 1000,
@@ -222,8 +217,8 @@
     ctrl.physicsUpdated = function() {
       if($scope.network) {
         $scope.network.setOptions({ physics: {
-          enabled: ctrl.physicsEnabled,
-          solver: ctrl.physics
+          enabled: $scope.physicsEnabled,
+          solver: $scope.physics
         }});
         $scope.network.stabilize();
       }
@@ -238,14 +233,16 @@
           }
         }
       };
-      if (ctrl.layoutSelect === 'standard') {
-        ctrl.physics = 'forceAtlas2Based';
+      if ($scope.layout === 'standard') {
+        if ($scope.physics === 'hierarchicalRepulsion') {
+          $scope.physics = 'forceAtlas2Based';
+        }
         options.layout = {
           hierarchical: false
         };
       }
-      else if (ctrl.layoutSelect === 'hierarchyTop') {
-        ctrl.physics = 'hierarchicalRepulsion';
+      else if ($scope.layout === 'hierarchyTop') {
+        $scope.physics = 'hierarchicalRepulsion';
         options.layout = {
           hierarchical: {
             direction: 'UD',
@@ -253,8 +250,8 @@
           }
         };
       }
-      else if (ctrl.layoutSelect === 'hierarchyBottom') {
-        ctrl.physics = 'hierarchicalRepulsion';
+      else if ($scope.layout === 'hierarchyBottom') {
+        $scope.physics = 'hierarchicalRepulsion';
         options.layout = {
           hierarchical: {
             direction: 'DU',
@@ -262,8 +259,8 @@
           }
         };
       }
-      else if (ctrl.layoutSelect === 'hierarchyLeft') {
-        ctrl.physics = 'hierarchicalRepulsion';
+      else if ($scope.layout === 'hierarchyLeft') {
+        $scope.physics = 'hierarchicalRepulsion';
         options.layout = {
           hierarchical: {
             direction: 'LR',
@@ -271,8 +268,8 @@
           }
         };
       }
-      else {
-        ctrl.physics = 'hierarchicalRepulsion';
+      else if ($scope.layout === 'hierarchyRight') {
+        $scope.physics = 'hierarchicalRepulsion';
         options.layout = {
           hierarchical: {
             direction: 'RL',
@@ -283,8 +280,8 @@
 
       var physicsOptions = {
         physics: {
-          enabled: ctrl.physicsEnabled,
-          solver: ctrl.physics
+          enabled: $scope.physicsEnabled,
+          solver: $scope.physics
         }
       };
 
@@ -342,28 +339,16 @@
       angular.extend(ctrl.graphEvents, newValue);
     });
 
-    $scope.$watch('ctrl.physicsEnabled', function(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        ctrl.physicsUpdated();
-      }
+    $scope.$watch('physicsEnabled', function(newValue, oldValue) {
+      ctrl.physicsUpdated();
     });
 
-    $scope.$watch('ctrl.physics', function(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        ctrl.physicsUpdated();
-      }
+    $scope.$watch('physics', function(newValue, oldValue) {
+      ctrl.physicsUpdated();
     });
 
-    $scope.$watch('ctrl.layoutHierarchy', function(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        ctrl.layoutUpdated();
-      }
-    });
-
-    $scope.$watch('ctrl.layoutSelect', function(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        ctrl.layoutUpdated();
-      }
+    $scope.$watch('layout', function(newValue, oldValue) {
+      ctrl.layoutUpdated();
     });
 
     ctrl.getNodeLabel = function(nodeId) {

@@ -9,20 +9,20 @@
       <div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" ng-model="ctrl.physicsEnabled">
+            <input type="checkbox" ng-model="physicsEnabled">
             Enable Physics
           </label>
-          <span ng-show="ctrl.physicsEnabled">
+          <span ng-show="physicsEnabled">
             <label for="physicsSelect"> Physics: </label>
-            <select name="physicsSelect" ng-model="ctrl.physics">
+            <select name="physicsSelect" ng-model="physics">
               <option value="barnesHut">barnesHut</option>
               <option value="forceAtlas2Based">forceAtlas2Based</option>
               <option value="repulsion">repulsion</option>
               <option value="hierarchicalRepulsion">hierarchicalRepulsion</option>
             </select>
           </span>
-          <label for="layoutSelect"> Layout: </label>
-          <select name="layoutSelect" ng-model="ctrl.layoutSelect">
+          <label for="layout"> Layout: </label>
+          <select name="layout" ng-model="layout">
             <option value="standard">Standard</option>
             <option value="hierarchyTop">Hierarchy - Top</option>
             <option value="hierarchyBottom">Hierarchy - Bottom</option>

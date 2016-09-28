@@ -14,6 +14,8 @@
         uris: '=',
         graphSearch: '=?',
         graphExpand: '=?',
+        physics: '=?',
+        layout: '=?',
         customGraphOptions: '=?graphOptions',
         customGraphEvents: '=?graphEvents'
       },
@@ -24,8 +26,24 @@
         if (!attrs.graphSearch) {
           $scope.graphSearch = visjsGraphService.search;
         }
+
         if (!attrs.graphExpand) {
           $scope.graphExpand = visjsGraphService.expand;
+        }
+
+        if (!attrs.physics) {
+          $scope.physicsEnabled = true;
+          $scope.physics = 'forceAtlas2Based';
+        } else if (attrs.physics === 'false') {
+          $scope.physicsEnabled = false;
+          $scope.physics = 'forceAtlas2Based';
+        } else {
+          $scope.physicsEnabled = true;
+          $scope.userDefinedPhysics = true;
+        }
+
+        if (!attrs.layout) {
+          $scope.layout = 'standard';
         }
       }
     };
