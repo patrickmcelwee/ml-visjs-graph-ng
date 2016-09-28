@@ -151,6 +151,9 @@
       onload: function(network) {
         ctrl.network = network;
       },
+      stabilized: function() {
+        ctrl.network.fit();
+      },
       // Right-click for a redirect to the detail page for a node
       oncontext: function(params) {
         var coordinates = params.pointer.DOM;
