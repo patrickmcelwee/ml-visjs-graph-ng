@@ -1,6 +1,6 @@
 {
   "name": "ml-visjs-graph-ng",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Graph visualizations for Angular app with VisJS, using triples stored in MarkLogic",
   "main": "gulpfile.js",
   "dependencies": {
