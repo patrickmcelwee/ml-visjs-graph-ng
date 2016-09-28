@@ -14,7 +14,8 @@
         uris: '=',
         graphSearch: '=?',
         graphExpand: '=?',
-        customGraphOptions: '=?graphOptions'
+        customGraphOptions: '=?graphOptions',
+        customGraphEvents: '=?graphEvents'
       },
       templateUrl: '/visjs-graph/visjs-graph.html',
       controller: 'visjsGraphCtrl',

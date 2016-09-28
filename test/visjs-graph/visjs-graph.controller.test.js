@@ -42,4 +42,17 @@ describe('visjsGraphCtrl', function() {
     expect(controller.graphOptions.edges.color).toBe('#FFFFFF');
     expect(scope.network.setOptions).toHaveBeenCalledWith(customOptions);
   });
+
+  it('allows override and extension of graphEvents', function() {
+    var controller = $controller('visjsGraphCtrl', {
+      $scope: scope
+    });
+    var override = jasmine.createSpy('override stabilized');
+    var extension = jasmine.createSpy('define hold');
+    var customEvents = {stabilized: override, hold: extension};
+    scope.customGraphEvents = customEvents;
+    scope.$apply();
+    expect(controller.graphEvents.stabilized).toBe(override);
+    expect(controller.graphEvents.hold).toBe(extension);
+  });
 });

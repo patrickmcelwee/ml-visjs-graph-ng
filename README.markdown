@@ -79,6 +79,29 @@ For example:
 <ml-visjs-graph uris="[ctrl.uri]" graph-options="{edges: {color: 'red'}, nodes: {color: {background: 'orange'}}}"></ml-visjs-graph>
 ```
 
+### Override VisJS graphEvents
+
+VisJS also provides [many event hooks for you to add behavior or draw on the canvas](http://visjs.org/docs/network/#Events). We have specified several in the [visjsGraphCtrl](https://github.com/patrickmcelwee/ml-visjs-graph-ng/blob/master/src/visjs-graph/visjs-graph.controller.js). You can override these or add additional event hooks by passing an object to `graph-events` in the `ml-visjs-graph` directive. (If you want to remove one of the event hooks defined in this library, you will have to specify an empty, 'no-op' function.)
+
+For example, create something like this in your controller:
+
+```javascript
+$scope.myEvents = {
+  stabilized: function() {
+    console.log('overrode stabilized event to remove auto-fitting behavior');
+  },
+  hold: function(params) {
+    console.log('you are holding something: ', params);
+  }
+};
+```
+
+Then, in your template:
+
+```html
+<ml-visjs-graph uris="[ctrl.uri]" graph-events="myEvents"></ml-visjs-graph>
+```
+
 ### Override default graphSearch and graphExpand<a name="custom-graph-search"></a>
 
 You can override the default graphSearch and/or graphExpand in order to provide custom data provider. functions Specify them in the directive:

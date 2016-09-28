@@ -338,6 +338,10 @@
       }
     });
 
+    $scope.$watch('customGraphEvents', function(newValue, oldValue) {
+      angular.extend(ctrl.graphEvents, newValue);
+    });
+
     $scope.$watch('ctrl.physicsEnabled', function(newValue, oldValue) {
       if (newValue !== oldValue) {
         ctrl.physicsUpdated();

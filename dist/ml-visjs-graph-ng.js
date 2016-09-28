@@ -80,7 +80,8 @@
         uris: '=',
         graphSearch: '=?',
         graphExpand: '=?',
-        customGraphOptions: '=?graphOptions'
+        customGraphOptions: '=?graphOptions',
+        customGraphEvents: '=?graphEvents'
       },
       templateUrl: '/visjs-graph/visjs-graph.html',
       controller: 'visjsGraphCtrl',
@@ -436,6 +437,10 @@
       if ($scope.network) {
         $scope.network.setOptions(newValue);
       }
+    });
+
+    $scope.$watch('customGraphEvents', function(newValue, oldValue) {
+      angular.extend(ctrl.graphEvents, newValue);
     });
 
     $scope.$watch('ctrl.physicsEnabled', function(newValue, oldValue) {
