@@ -10,7 +10,6 @@
   function visjsGraphCtrl($scope, $location, VisDataSet) {
     var ctrl = this;
 
-    var nodeMap = {};
     var nodes = new VisDataSet([]);
     var edges = new VisDataSet([]);
     ctrl.graphData = {
@@ -171,13 +170,13 @@
           selectedNode = selectedData[0];
         }
 
-        var nodeIds = ctrl.getNodeIds();
+        var nodeIds = nodes.getIds();
         var nodePosition = $scope.network.getPositions(nodeIds);
         if (nodePosition) {
           for (var i=0; i < nodeIds.length; i++) {
             var nodePos = nodePosition[ nodeIds[i] ];
             if (nodePos) {
-              var tmpNode = ctrl.getNode(nodeIds[i]);
+              var tmpNode = nodes.get(nodeIds[i]);
               // Backwards compatibility
               if (tmpNode && tmpNode.linkCount) {
                 tmpNode.edgeCount = tmpNode.linkCount;
@@ -307,11 +306,6 @@
       }
 
       if ($scope.items) {
-        // Add nodes to nodeMap
-        for (var i=0; i < $scope.items.nodes.length; i++) {
-          nodeMap[$scope.items.nodes[i].id] = $scope.items.nodes[i];
-        }
-
         ctrl.refreshGraph();
       }
       ctrl.physicsUpdated();
@@ -349,27 +343,13 @@
     });
 
     ctrl.getNode = function(nodeId) {
-      return nodeMap[nodeId];
-    };
-
-    ctrl.getNodeIds = function() {
-      var nodes = [];
-      for (var key in nodeMap) {
-        nodes.push( nodeMap[key].id );
-      }
-
-      return nodes;
+      return nodes.get(nodeId);
     };
 
     ctrl.updateGraph = function(data) {
       $scope.items = data;
 
-      // Add nodes to nodeMap
       if ($scope.items && $scope.items.nodes) {
-        for (var i=0; i < $scope.items.nodes.length; i++) {
-          nodeMap[$scope.items.nodes[i].id] = $scope.items.nodes[i];
-        }
-
         ctrl.refreshGraph();
       }
     };
