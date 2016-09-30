@@ -22,7 +22,8 @@
           };
 
           function search(ids) {
-            return $http.get(api+'/visjs?rs:subject=' + ids[0]).then(
+            return $http.get(api+'/visjs?rs:subject=' + encodeURIComponent(ids[0]))
+            .then(
               function(response) {
                 return response.data;
               }
@@ -31,7 +32,8 @@
 
           function expand(ids) {
             return $http.get(
-              api+'/visjs?rs:expand=true&rs:subject=' + ids[0]).then(
+              api+'/visjs?rs:expand=true&rs:subject=' + encodeURIComponent(ids[0]))
+            .then(
               function (response) {
                 return response.data;
               });
