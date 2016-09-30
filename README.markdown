@@ -115,11 +115,11 @@ Then, in your template:
 
 ### Other options
 
-You can specify which layout you want, by passing in `layout="hierarchyTop"`. The default is 'standard'.
+You can specify which layout you want, by passing in `layout="'hierarchyTop'"`. The default is 'standard'.
 
-You can also specify a different physics for the 'standard' (default) layout: `physics="barnesHut"`
+You can also specify a different physics for the 'standard' (default) layout: `physics="'barnesHut'"`
 
-Or turn off physics initially with `physics=false`.
+Or turn off physics initially with `physics="false"`.
 
 ### Override default graphSearch and graphExpand<a name="custom-graph-search"></a>
 
