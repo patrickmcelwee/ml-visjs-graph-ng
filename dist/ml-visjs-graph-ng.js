@@ -409,6 +409,7 @@
     };
 
     function init() {
+      nodes.clear();
       if ($scope.items.nodes[0] && $scope.items.nodes[0].label) {
         ctrl.label = $scope.items.nodes[0].label;
       } else {
@@ -420,33 +421,40 @@
       ctrl.layoutUpdated();
     }
 
-    $scope.$watch('graphSearch', function(newValue, oldValue) {
+    $scope.$watch('graphSearch', function() {
       $scope.graphSearch($scope.uris).then(function(items) {
         $scope.items = items;
         init();
       });
     });
 
-    $scope.$watch('customGraphOptions', function(newValue, oldValue) {
+    $scope.$watch('uris', function() {
+      $scope.graphSearch($scope.uris).then(function(items) {
+        $scope.items = items;
+        init();
+      });
+    });
+
+    $scope.$watch('customGraphOptions', function(newValue) {
       angular.merge(ctrl.graphOptions, newValue);
       if ($scope.network) {
         $scope.network.setOptions(newValue);
       }
     });
 
-    $scope.$watch('customGraphEvents', function(newValue, oldValue) {
+    $scope.$watch('customGraphEvents', function(newValue) {
       angular.extend(ctrl.graphEvents, newValue);
     });
 
-    $scope.$watch('physicsEnabled', function(newValue, oldValue) {
+    $scope.$watch('physicsEnabled', function() {
       ctrl.physicsUpdated();
     });
 
-    $scope.$watch('physics', function(newValue, oldValue) {
+    $scope.$watch('physics', function() {
       ctrl.physicsUpdated();
     });
 
-    $scope.$watch('layout', function(newValue, oldValue) {
+    $scope.$watch('layout', function() {
       ctrl.layoutUpdated();
     });
 
