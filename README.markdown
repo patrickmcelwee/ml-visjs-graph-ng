@@ -113,9 +113,41 @@ Then, in your template:
 <ml-visjs-graph uris="[ctrl.uri]" graph-events="myEvents"></ml-visjs-graph>
 ```
 
-### Other options
+### Get access to the VisJS network object in your controller
+
+With two steps, you can get access to the VisJS network object in your controller (which is useful for calling methods, often in [VisJS graphEvents](#visjs-graphevents)).
+
+1. Add an `onload` event to your [VisJS graphEvents](#visjs-graphevents)).
+
+```javascript
+ctrl.myEvents = {
+  onload: function(network) {
+    ctrl.visjsNetwork = network;
+  }
+};
+```
+
+2. Hook up a bidirectional binding on `network`:
+
+```html
+<ml-visjs-graph uris="[ctrl.uri]" network="ctrl.visjsNetwork" graph-events="ctrl.myEvents"></ml-visjs-graph>
+```
+
+### Get access to the VisJS nodes and edges
+
+This can be useful if you want to add or delete nodes and edges. It can also be useful if you want to watch for changes in order to take some other action (such as clustering some set of nodes together).
+
+To do this, simply bind an object in your controller to `items` in the `ml-visjs-graph` directive scope:
+
+```html
+<ml-visjs-graph uris="[ctrl.uri]" items="ctrl.visjsItems"></ml-visjs-graph>
+```
+
+### Specify Layout
 
 You can specify which layout you want, by passing in `layout="'hierarchyTop'"`. The default is 'standard'.
+
+### Specify Physics
 
 You can also specify a different physics for the 'standard' (default) layout: `physics="'barnesHut'"`
 

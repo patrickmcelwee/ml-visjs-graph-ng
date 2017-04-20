@@ -17,7 +17,9 @@
         physics: '=?',
         layout: '=?',
         customGraphOptions: '=?graphOptions',
-        customGraphEvents: '=?graphEvents'
+        customGraphEvents: '=?graphEvents',
+        network: '=?',
+        items: '=?'
       },
       templateUrl: '/visjs-graph/visjs-graph.html',
       controller: 'visjsGraphCtrl',
