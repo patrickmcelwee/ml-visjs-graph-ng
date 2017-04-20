@@ -143,6 +143,8 @@ To do this, simply bind an object in your controller to `items` in the `ml-visjs
 <ml-visjs-graph uris="[ctrl.uri]" items="ctrl.visjsItems"></ml-visjs-graph>
 ```
 
+The `ctrl.visjsItems` object is now an object containing `nodes` and `items` pointing to [VisJS Data Sets](http://visjs.org/docs/data/dataset.html).
+
 ### Specify Layout
 
 You can specify which layout you want, by passing in `layout="'hierarchyTop'"`. The default is 'standard'.
