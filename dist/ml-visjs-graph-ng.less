@@ -10,8 +10,9 @@ div.vis-network div.vis-manipulation div.vis-button:hover { box-shadow: none;
 
 div.vis-network div.vis-close {
   background-image: none;
-  left: -5px;
-  top: 0;
+  left: -1px;
+  bottom: 7px;
+  top: initial;
 }
 
 div.vis-network div.vis-close:before {
@@ -159,7 +160,7 @@ div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends:before {
 
 div.vis-network div.vis-navigation div.vis-button:hover::before {
   color: #999;
-  font-size: 28px;
+  font-size: 29px;
 }
 
 div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends:hover::before {
@@ -179,13 +180,8 @@ div.vis-network div.vis-navigation div.vis-button:hover {
 }
 
 div.vis-network div.vis-edit-mode {
-    top: -2px;
-}
-
-div.vis-network div.vis-manipulation {
-  border: 1px solid #999;
-  background: #f2f2f2;
-  height: 50px;
+    bottom: 2px;
+    top: initial;
 }
 
 div.vis-network div.vis-edit-mode div.vis-label,
@@ -227,14 +223,15 @@ div.vis-network div.vis-edit-mode div.vis-button.vis-edit.vis-edit-mode:hover {
 }
 
 div.vis-network div.vis-manipulation {
-  border-bottom: 2px solid #999;
+  border: 1px solid #999;
   background: white;
   height: 40px;
-  width: 60%;
-  border-left: 0;
-  border-top: 0;
-  top: 1px;
+  border-bottom: 2px solid #999;
+  border-right: 2px solid #999;
+  top: initial;
+  bottom: 5px;
   left: 1px;
+  padding-left: 24px;
 }
 
 div.vis-network div.vis-manipulation div.vis-button {
@@ -245,6 +242,7 @@ div.vis-network div.vis-manipulation div.vis-button {
 div.vis-network div.vis-manipulation div.vis-separator-line {
   height: 30px;
   background-color: #999;
+  margin-left: 29px;
 }
 
 .vis-separator-line + .vis-button .vis-label {

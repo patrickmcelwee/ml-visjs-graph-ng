@@ -7,7 +7,8 @@
   <div class="col-md-12" style="border: 1px solid lightgrey;">
     <div class="components-container">
       <div>
-        <div class="checkbox">
+        <vis-network class="object-graph col-md-12" data="ctrl.graphData" options="ctrl.graphOptions" events="ctrl.graphEvents"></vis-network>
+        <div class="checkbox ml-visjs-control">
           <label>
             <input type="checkbox" ng-model="physicsEnabled">
             Enable Physics
@@ -30,7 +31,6 @@
             <option value="hierarchyRight">Hierarchy - Right</option>
           </select>
         </div>
-        <vis-network class="object-graph col-md-12" data="ctrl.graphData" options="ctrl.graphOptions" events="ctrl.graphEvents"></vis-network>
         <div class="pull-right" id="graph-popover"></div>
       </div>
     </div>
