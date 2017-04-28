@@ -286,42 +286,44 @@
         $scope.graphExpand([nodeUri]).then(ctrl.updateGraph);
       },
       afterDrawing: function(ctx) {
-        var nodePositions = $scope.network.getPositions();
-        nodes.forEach(function(node) {
-          // if node is not in a cluster
-          if ($scope.network.findNode(node.id).length === 1) {
-            var nodePosition = nodePositions[node.id];
+        if ($scope.network) {
+          var nodePositions = $scope.network.getPositions();
+          nodes.forEach(function(node) {
+            // if node is not in a cluster
+            if ($scope.network.findNode(node.id).length === 1) {
+              var nodePosition = nodePositions[node.id];
 
-            // Backwards compatibility
-            if (node.linkCount) {
-              node.edgeCount = node.linkCount;
+              // Backwards compatibility
+              if (node.linkCount) {
+                node.edgeCount = node.linkCount;
+              }
+
+              if (node.edgeCount && node.edgeCount > 0) {
+                var radius;
+                if (node.edgeCount >= 100 && node.edgeCount < 1000) {
+                  radius = 15;
+                }
+                else if (node.edgeCount >= 1000) {
+                  radius = 20;
+                }
+                else {
+                  radius = 10;
+                }
+
+                ctx.strokeStyle = 'white';
+                ctx.fillStyle = '#848484';
+                ctx.lineWidth = 1;
+                ctx.circle(nodePosition.x - 20, nodePosition.y - 20, radius);
+                ctx.fill();
+                ctx.stroke();
+
+                // Text info
+                ctx.font = '8pt Lucida';
+                ctx.strokeText(node.edgeCount, nodePosition.x - 20, nodePosition.y - 24);
+              }
             }
-
-            if (node.edgeCount && node.edgeCount > 0) {
-              var radius;
-              if (node.edgeCount >= 100 && node.edgeCount < 1000) {
-                radius = 15;
-              }
-              else if (node.edgeCount >= 1000) {
-                radius = 20;
-              }
-              else {
-                radius = 10;
-              }
-
-              ctx.strokeStyle = 'white';
-              ctx.fillStyle = '#848484';
-              ctx.lineWidth = 1;
-              ctx.circle(nodePosition.x - 20, nodePosition.y - 20, radius);
-              ctx.fill();
-              ctx.stroke();
-
-              // Text info
-              ctx.font = '8pt Lucida';
-              ctx.strokeText(node.edgeCount, nodePosition.x - 20, nodePosition.y - 24);
-            }
-          }
-        });
+          });
+        }
       }
     };
 
