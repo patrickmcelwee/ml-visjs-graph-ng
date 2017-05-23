@@ -417,11 +417,6 @@
 
     function init() {
       nodes.clear();
-      if ($scope.items.nodes[0] && $scope.items.nodes[0].label) {
-        ctrl.label = $scope.items.nodes[0].label;
-      } else {
-        ctrl.label = 'this node';
-      }
 
       ctrl.refreshGraph();
       ctrl.physicsUpdated();
