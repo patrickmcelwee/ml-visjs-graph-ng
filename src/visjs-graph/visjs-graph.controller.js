@@ -308,10 +308,13 @@
     });
 
     $scope.$watch('uris', function() {
-      $scope.graphSearch($scope.uris).then(function(items) {
-        $scope.items = items;
-        init();
-      });
+      // if the network is already initialized, we need to re-initialize
+      if ($scope.network) {
+        $scope.graphSearch($scope.uris).then(function(items) {
+          $scope.items = items;
+          init();
+        });
+      }
     });
 
     $scope.$watch('customGraphOptions', function(newValue) {
