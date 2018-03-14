@@ -62,7 +62,7 @@ You can add a VisJS graph for a document by adding the following HTML snippet
 to a template, for example to `ui/app/detail/detail.html`:
 
 ```html
-<ml-visjs-graph uris="[ctrl.uri]"></ml-visjs-graph>
+<ml-visjs-graph uris="[$ctrl.uri]"></ml-visjs-graph>
 ```
 
 NOTE: Support for multiple uris is not yet provided, but that future extension
@@ -76,7 +76,7 @@ VisJS provides a [robust set of options to change how your graph is displayed](h
 For example:
 
 ```html
-<ml-visjs-graph uris="[ctrl.uri]" graph-options="{edges: {color: 'red'}, nodes: {color: {background: 'orange'}}}"></ml-visjs-graph>
+<ml-visjs-graph uris="[$ctrl.uri]" graph-options="{edges: {color: 'red'}, nodes: {color: {background: 'orange'}}}"></ml-visjs-graph>
 ```
 
 ### VisJS graphEvents
@@ -110,7 +110,7 @@ $scope.myEvents = {
 Then, in your template:
 
 ```html
-<ml-visjs-graph uris="[ctrl.uri]" graph-events="myEvents"></ml-visjs-graph>
+<ml-visjs-graph uris="[$ctrl.uri]" graph-events="myEvents"></ml-visjs-graph>
 ```
 
 ### Get access to the VisJS network object in your controller
@@ -130,7 +130,7 @@ ctrl.myEvents = {
 2. Hook up a bidirectional binding on `network`:
 
 ```html
-<ml-visjs-graph uris="[ctrl.uri]" network="ctrl.visjsNetwork" graph-events="ctrl.myEvents"></ml-visjs-graph>
+<ml-visjs-graph uris="[$ctrl.uri]" network="$ctrl.visjsNetwork" graph-events="$ctrl.myEvents"></ml-visjs-graph>
 ```
 
 ### Get access to the VisJS nodes and edges
@@ -140,7 +140,7 @@ This can be useful if you want to add or delete nodes and edges. It can also be 
 To do this, simply bind an object in your controller to `items` in the `ml-visjs-graph` directive scope:
 
 ```html
-<ml-visjs-graph uris="[ctrl.uri]" items="ctrl.visjsItems"></ml-visjs-graph>
+<ml-visjs-graph uris="[$ctrl.uri]" items="$ctrl.visjsItems"></ml-visjs-graph>
 ```
 
 The `ctrl.visjsItems` object is now an object containing `nodes` and `items` pointing to [VisJS Data Sets](http://visjs.org/docs/data/dataset.html).
@@ -161,7 +161,7 @@ You can override the default graphSearch and/or graphExpand in order to provide 
 
 
 ```html
-<ml-visjs-graph uris="[ctrl.uri]" graph-search="myGraphSearch" graph-expand="myGraphExpand"></ml-visjs-graph>
+<ml-visjs-graph uris="[$ctrl.uri]" graph-search="myGraphSearch" graph-expand="myGraphExpand"></ml-visjs-graph>
 ```
 
 - the graphSearch function is called when the graph is initialized. It takes as its first and only argument an array of URIs (the ones you pass to the directive)
