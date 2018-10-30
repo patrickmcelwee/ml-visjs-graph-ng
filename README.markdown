@@ -21,7 +21,8 @@ If you want to use the default graphSearch and graphExpand functions, which retu
 ### Enable the triple index
 
 Since this library works based on SPARQL queries against triples stored
-in your MarkLogic database, you need to enable the triple index. 
+in your MarkLogic database, you need to enable the triple index. **Note 
+that the triple index is enabled by default starting with MarkLogic 9.0.**
 
 #### Using Roxy
 
